@@ -112,7 +112,7 @@ class ParseBase(object):
             url += '?%s' % urlencode(kw)
             data = None
         else:
-            data = data.encode('utf-8')
+            data = data
 
         headers = {
             'Content-type': 'application/json',
@@ -121,7 +121,7 @@ class ParseBase(object):
         }
         headers.update(extra_headers or {})
 
-        request = Request(url, data, headers)
+        request = Request(url.encode('utf-8'), data, headers)
 
         if ACCESS_KEYS.get('session_token'):
             request.add_header('X-Parse-Session-Token', ACCESS_KEYS.get('session_token'))
